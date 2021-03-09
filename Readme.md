@@ -62,18 +62,18 @@ The server runs on port 21025 (which Docker exposes).
 The included default starbound config (at `/config/sbinit.conf`):
 
     {
-    "assetDirectories" : [
-        "/app/assets/",
-        "/config/mods/"
-    ],
+        "assetDirectories" : [
+            "/app/assets/",
+            "/config/mods/"
+        ],
 
-    "storageDirectory" : "/config/storage/",
+        "storageDirectory" : "/config/storage/",
 
-    "defaultConfiguration" : {
-        "gameServerBind" : "*",
-        "queryServerBind" : "*",
-        "rconServerBind" : "*"
-    }
+        "defaultConfiguration" : {
+            "gameServerBind" : "*",
+            "queryServerBind" : "*",
+            "rconServerBind" : "*"
+        }
     }
 
 ## Running Notes
