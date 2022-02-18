@@ -1,4 +1,4 @@
-FROM minchinweb/base
+FROM ghcr.io/minchinweb/base
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -9,6 +9,17 @@ COPY root/ /
 # the server executable and base game assets need to be provided and mounted under /app
 VOLUME /config
 VOLUME /app
+
+# install "steamcmd" to allow installing the game server from within the image
+RUN \
+    echo "[*] apt update" && \
+    apt -qq update && \
+    echo "[*] apt install" && \
+    apt -qq install -y \
+            steamcmd \
+    && \
+    echo "[*] cleanup from apt" && \
+    rm -rf /var/lib/apt/lists/*
 
 CMD /app/linux/starbound_server -bootconfig /config/sbinit.config
 
