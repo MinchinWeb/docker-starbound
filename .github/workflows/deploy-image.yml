@@ -37,18 +37,9 @@ jobs:
           echo Image Name: $IMAGE_NAME
           echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
 
-          export VERSION=$(git describe --tags --always)
-          echo Version: $VERSION
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-
           export BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           echo Build Date: $BUILD_DATE
           echo "BUILD_DATE=${BUILD_DATE}" >> $GITHUB_ENV
-
-          export UBUNTU_CODENAME=$(cat Dockerfile | grep -oP 'UBUNTU_VERSION=\K\w+')
-          echo Ubuntu Versions: ${UBUNTU_CODENAME}
-          echo "UBUNTU_CODENAME=${UBUNTU_CODENAME}" >> $GITHUB_ENV
-
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -81,6 +72,5 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.UBUNTU_CODENAME }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
