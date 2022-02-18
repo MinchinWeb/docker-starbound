@@ -10,20 +10,6 @@ COPY root/ /
 VOLUME /config
 VOLUME /app
 
-# install "steamcmd" to allow installing the game server from within the image
-RUN \
-    echo "[*] allow 32 bit packages" && \
-    # steamcmd is only 32 bit
-    dpkg --add-architecture i386 && \
-    echo "[*] apt update" && \
-    apt -qq update && \
-    echo "[*] apt install" && \
-    apt -qq install -y \
-            steamcmd \
-    && \
-    echo "[*] cleanup from apt" && \
-    rm -rf /var/lib/apt/lists/*
-
 CMD /app/linux/starbound_server -bootconfig /config/sbinit.config
 
 
